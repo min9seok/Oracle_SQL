@@ -1,0 +1,98 @@
+1. SQL 이란 ? 
+--                       < 요청
+-- 서버(서비스 제공하는 쪽)   클라이언트(서비스 제공받는 쪽)
+--                       > 응답
+-- 구조화된 질의 언어                        
+1-2. SQL의 5가지 종류 
+   ㄱ.  DQL 조회(SELECT)
+   ㄴ.  DDL 생성(CREATE) 삭제(DROP) 수정(ALTER)
+   ㄷ.  DCL 권한생성(GRANT) 권한삭제(REVOKE)
+   ㄹ.  DML 삽입(INSERT) 조건삭제(DELETE) 수정(UPDATE) 이름수정(RENAME) 삭제(T..)
+   ㅁ.  TCL 트랜젝션 -- 확정(COMMIT) 되돌리기(Rollback) 저장위치(SAVEPOINT) 
+
+2. PL/SQL 이란 ?  오라클에 iF문 예외처리 
+   
+3. RDBMS 란 ? 
+    1) DATA 데이터의 집합
+    2) DATABASE 데이터 저장소
+    3) DBMS 데이터 저장소 관리 도구
+    4) R + DBMS 관계형 + 데이터 저장소 관리 도구
+    
+4. SQL을 작성하세요. ( SCOTT 사용자 접속 후 )
+   ㄱ. 현재 접속한 사용자 정보 조회 show user;
+   ㄴ. 모든 사용자 정보를 조회하는 SQL을 작성하세요. SELECT * FROM all_users;
+   ㄷ. 현재 접속한 사용자가 소유한 테이블 정보 조회 SELECT * FROM user_tables;
+   ㄹ. hong/1234 계정 생성 CREATE 
+   ㅁ. hong 권한 부여 GRANT
+   ㅂ. hong 부여한 권한 제거 REVOKE
+   ㅅ. hong 계정 삭제 DROP
+    
+5. DBA 란 ? -- 데이터베이스 관리자(DadaBase Administrator)
+
+[ 용어 구분]
+오라클 서버
+오라클 데이터베이스 : 전역 데이터베이스 이름
+오라클 인스턴스       : SID
+
+6. SID 란 ?  --XE 설치한 오라클 정보 
+-- 전역데이터베이스 이름에서 도메인명을 삭제하면 SID 이름과 동일하다
+-- 오라클 인스턴스를 식별하기 위한 유일한 이름 
+6-2. 전역 데이터베이스 이름 이란?    XE 설치한 오라클 정보 
+-- Global Database Name : 전 세계에서 유일한 DB 이름
+-- 데이터베이스명.도메인명 
+-- 오라클데이터베이스를 식별하기 위한 유일한 이름(값)
+
+7. "데이터 모델"이란 ?  
+
+8. 관계형 데이터 모델의 핵심 구성 요소 
+  ㄱ.  개체
+  ㄴ.  속성
+  ㄷ.  관계
+  
+9. 테이블 ( table )?  데이터를 저장하는 단위
+  
+9-2. 테이블 스페이스 ?   데이터를 저장하는 단위에 최상위 개념 
+
+10. 단축키를 적으세요.
+  ㄱ. SQL 작성 후 실행하는 방법    :
+      (1)  F5
+      (2)  Ctrl Enter
+
+  ㄴ. 주석 처리하는 방법           :   Crtl /  --
+
+11. 오라클 삭제하는 순서를 적으세요. 
+   ㄱ.  서비스 사용중지
+   ㄴ.  폴더 삭제
+   ㄷ.  제어판 삭제
+   ㄹ.  레지스터리 편집 
+
+12. Sqlplus.exe 를  사용해서 
+
+   ㄱ. sys 계정으로 로그인하고   sqlplus / as sysdba     
+   ㄴ. 로그인한 계정을 확인하고   show user
+   ㄷ. 모든 사용자 계정 조회하고 select * from all_users;
+   ㄹ. 연결종료하는 코딩을 하세요. exit
+
+13. tnsname.ora 파일의 용도를 설명하세요. 계정 접속 정보 
+ -- 클라이언트 > 오라클 DB서버와 연결 설정 정보    
+    
+14.  오라클 설치 후 주요 오라클 서비스 2가지       ***  
+  ㄱ.  --   1) OracleServiceXE(OracleService + SID(시스템식별자) )    
+  ㄴ.  --   2) OracleXETNSListener(OracleService + SID + TNSLIstener)
+
+15. SQL은 기본 [ (1)   ] , [ (2) ) ]을 대상으로 수행된다.    
+         -- 스키마.테이블명 , 스키마.뷰명
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+      

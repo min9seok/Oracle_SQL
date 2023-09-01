@@ -1,0 +1,164 @@
+1. 폴더 생성
+ OracleClass 폴더 생성
+   ㄴ days01 폴더
+2. Ora_Help.zip
+3. 용어
+ 1) 데이터(Data)
+  ㄱ. 재료·자료·논거(論據)라는 뜻인 'datum'의 복수형이다.
+  ㄴ. 넓은 의미에서 데이터는 의미 있는 정보를 가진 모든 값, 사람이나 자동 기기가 생성 또는 처리하는 형태로 표시된 것을 뜻한다. 
+  ㄷ. 정보(information) 의미를 부여한 값(결과)
+
+ 2) 데이터베이스(DataBase == DB)
+  ㄱ. 공유되어 사용될 목적으로 통합 관리되는 데이터의 집합 
+  ㄴ. Data(자료) + Base(저장소)
+  ㄷ. 효과적으로 추출, 분류, 저장 등
+  ㄹ. 현실 세계에 존재하는 유,무형 등 방대한 정보 집합
+
+ 3) DBMS (DataBase Management System)
+  ㄱ. 소프트웨어
+  ㄴ. Oracle, MySQL, MS SQL 등
+  ㄷ. Oracle XE 11g설치 
+    - SYS,SYSTEM DB관리자 계정(DBA) : ss123$
+    - https://www.oracle.com/
+      https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+      https://docs.oracle.com/cd/E17781_01/index.htm
+    - 오라클 종류(edition) : EE, SE, SEO, XE(express), PE
+    - 11g == grid 
+       21c == cloud
+       9i   == internet
+  ㄹ. SQL Developer 23.1
+    - https://www.oracle.com/database/sqldeveloper/technologies/download/
+
+ 4. Oracle 11g XE 설치 확인
+  - C:\oraclexe 폴더 생성 확인
+  - 제어판 - 시스템 및 보안 - 관리도구 - 서비스
+   1) OracleServiceXE(OracleService + SID(시스템식별자) ) 
+   2) OracleXETNSListener(OracleService + SID + TNSLIstener)
+
+ 5. 오라클서버에 연결해서 관리하는 클라이언트 도구
+  - SQL Developer 23.1
+    SQL *PLUS 툴
+    토드( Toad ) 등 등
+
+ 6. 데이터 모델 : 컴퓨터에 데이터를 저장하는 방식을 정의해 놓은 개념 모델
+  - 데이터 모델의 종류 : 계층형, 네트워크형, [관계형, 객체지향적 데이터 모델 등
+
+ 7. 관계형 데이터 모델 + DBMS = RDBMS
+  - 관계형 - 데이터 간 관계에 초점을 둔 모델 
+                데이터 저장소(테이블)과 테이블 간 관계에 초점을 둔 모델
+
+ 8. 관계형 데이터 모델의 핵심 구성 요소
+  1) 개체(entity) - 데이터를 저장하는 가장 작은 단위, RDBMS(table == 릴레이션)
+  2) 속성(attribute) - 개체의 특징,종류,상태, 컬럼(열) column
+  3) 관게(relationship) - 개체와 개체 간의 연관성
+   
+   예) 부서의 정보를 저장할 개체(table) : dept
+       부서 개체가 가지는 속성(column) : 부서번호,부서명,부서장 등
+   
+   사원 개체(talbe) : employee
+        ''   가지는 속성(column) : 사원번호,사원명,입사일자 등
+
+   한명의 사원은 반드시 하나의 부서에 소속이 된다 (가정)
+   부서개체(table) 소속관계 사원개체(table) 연관성 ( 관계)
+
+ 9. DBA = DB(DataBase)+A(adminstrator) == 데이터베이스 관리자
+    SYS  ss123$ - 모든 권한 최고 DBA
+    SYSTEM ss123$ -  모든 권한 + DB 생성 X
+
+ 10. 테이블 스페이스(TableSpace)
+   1) 테이블(table) - 데이터를 저장하는 가장 작은 단위
+      행(ROW)  == 레코드
+   2) 논리적 단위 : 데이터블록 < 익스텐트 < 세그먼트 < 테이블스페이스
+   3) 데이터 저장하는 단위 중 가장 상위의 개념
+
+ 11. SID(시스템식별자) == XE
+   전역데이터베이스이름 == XE
+   OracleXETNSListener - 네트워크를 통해서 클라이언트가 오라클 서버와 연결을 담당하는 관리 프로그램
+
+ 12. 오라클 삭제
+   1) 서비스 실행 - 오라클 관련 서비스 모두 중지
+   2) 메뉴 - uninstall , deinstall 클릭
+    "프로그램 추가 및 삭제" Oracle 검색 후 제거 버튼 클릭
+   3) C:\oraclexe 설치 폴더 삭제
+   4) 레지스터리 삭제 - "레지스터리 편집기"  실행 - 관련 레지스터리 삭제(검색하면 나옴)
+
+ 13. 클라이언트 도구(본인PC) ---연결---> 오라클 서버(본인PC)
+   1) 1521 포트 방화벽 해제
+   2) sqlplus /?
+      (SQL, PL/SQL, SQL*Plus 명령어)-실행
+  사용 형식
+     sqlplus [ [<option>] [{logon | /nolog}] [<start>] ]
+
+    <logon> is: {<username>[/<password>]
+               [@<connect_identifier>] | / } // 	@[<net_service_name> | [//]Host[:Port]/<service_name>]
+               [AS {SYSDBA | SYSOPER | SYSASM}] [EDITION=value]
+
+  show user
+SELECT * FROM all_users;
+sqlplus sys/ss123$ as sysdba
+sqlplus / as sysdba
+
+ 14. SQL Developer 23.1
+ SELECT * FROM all_users;
+
+ 15. SQL ? 
+   클라이언트 도구   >   DB 서버
+                       질의  테이블(table) == 릴레이션
+   Structured 구조적
+   Query 질의
+   Language 언어
+
+ 16. PL/SQL = PL(Procedural Language)+SQL 절차적인 언어 문법
+
+ 17. SQL 종류
+  1) DQL ( Data Query Language )  조회 SELECT
+  2) DDL ( Data definition Language ) 정의 CREATE DROP ALTER
+  3) DML ( Data manipulation Language ) 조작 INSERT DELETE UPDATE RENAME TRUNCATE
+  4) DCL ( Data control Language ) 접근(권한) GRANT REVOKE
+  5) TCL ( Transaction Control Language ) 트랜젝션 COMMIT ROLLBACK SAVEPOINT 
+
+ 18. SQL 문장 작성법
+  • SQL 문장은 대소문자를 구별하지 않는다.
+  • SQL*Plus에서 SQL 문장은 SQL 프롬프트에 입력되며, 이후의 Line은 줄번호가 붙는다.
+  • SQL 명령을 종료할 때는 세미콜론(;)을 반드시 붙여야 한다.
+  • 맨 마지막 명령어 1개가 SQL buffer에 저장된다.
+  • SQL 문장은 한 줄 이상일 수 있다.
+  • SQL 명령어를 구성하고 있는 단어중 어디에서나 분리해도 된다.
+  • 한 개의 line에 한 개의 절(select, from, where) 형태로 나누어 입력하는 것을 권한다.그러나 한 개의 단어를 두 줄로 나누어 입력해서는 안된다.
+  • keyword는 대문자로 입력하도록 권한다.
+  • 다른 모든 단어 즉, table 이름, column 이름은 소문자로 입력을 권한다.
+  • keyword는 단축하거나 줄로 나누어 쓸 수 없다.
+  • 절은 대개 줄을 나누어 쓰도고 권한다.
+  •  탭과 줄 넣기는 읽기 쉽게 하기 위해 사용을 권한다.
+
+ 19. 계정 생성  ( DDL - CREATE )
+   1) 관리자 계정으로 접속( SYS,SYSTEM)
+   2)  scott 게정
+      tiger 비밀번호
+
+ 20 . scott 생성된 계정으로 접속
+    CREATE SESSION 권한이 없어서 로그인 실패
+  해결방법)
+  1) 권한을 부여할 수 있는 계정(SYS)
+  2)
+
+ 21. Privilege(권한) 설명
+  1) 권한 정의
+  2) 권하 부여 방법
+     (1) DBA  > SCOTT(계정)
+     (2) DBA  > 롤(role) : 권한... > SCOTT(계정)
+
+ 22. 권한의 종류
+  1) 시스템 권한 : 사용자 생성
+  2) 객체 권한   
+
+【형식】  DCL
+     GRANT 시스템권한명 또는 롤명 TO 사용자명 또는 롤명 또는 PUBLIC
+        [WITH ADMIN OPTION];
+
+ 23. scott 계정 삭제
+
+ 24. 데이터베이스 객체 ? DB 내에 존재하는 저장 구조 
+  예) 테이블, 뷰, 인덱스, 시노님, 시퀀스, 함수, 프로시저, 트리거, 패키지 등
+
+ 25. scott 계정 생성 > Schema scott 생성 : 모든 DB 객체들의 묶음(집합) - 테,인,뷰,프,,트함 등등

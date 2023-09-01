@@ -1,0 +1,188 @@
+1. SELECT문의 7가지 절을 적으시고, 처리 순서를 적으세요. 
+WITH 1
+SELECT 6
+FROM 2
+WHERE 3
+GROUP BY 4
+HAVING 5
+ORDER BY 7
+2. hr 소유의 employees 테이블의 구조를 확인 후 
+   이름과 성을 합쳐서 full_name 으로 출력하는 SQL을 작성하세요. 
+SELECT first_name,last_name
+        ,(first_name||' '||last_name) as full_name
+FROM EMPLOYEES;
+[질의 결과]
+FIRST_NAME           LAST_NAME                 FULL_NAME                                      FULL_NAME                                     
+-------------------- ------------------------- ---------------------------------------------- ----------------------------------------------
+Ellen                Abel                      Ellen Abel                                     Ellen Abel                                    
+Sundar               Ande                      Sundar Ande                                    Sundar Ande 
+
+//3. hr 계정의 유무를 확인하고
+//   만약에 hr 계정 상태가 잠김을 해제하고 비밀번호를 lion으로 변경하는 SQL을 작성하세요.
+//SELECT * 
+//FROM dba_users
+--WHERE username='HR'
+--WHERE username=UPPER('hr')
+//ALTER [] [] unlook [] password
+--ALTER [] hr  [] password [] unlook
+--ALTER user hr account unlook; 
+--ALTER user hr identified by lion;
+//4. emp 테이블의 job의 종류를 조회하고,
+//   job의 종류의 갯수를 출력하는 SQL를 작성하세요.  ( 문제 이해를 못햇네..)
+SELECT job 
+         ,count(job)
+FROM emp
+group by job;
+-- SELECT count(distinct(job))
+FROM emp;
+5. NULL에 대해서 설명하세요. 아직 모름 , 값 미설정  -- 비교연산자X SQL연산자 사용
+5-2. NULL 처리 함수를 적고 설명하세요. nvl(값,변경값) 값이 null일시 변경값 출력 --nvl2(값,변경값1,변경값2) nvlif() COALSESCE
+5-3. emp 테이블에서 comm 이 NULL인 사원만 pay(sal + comm )를 구해서
+     부서별 오름차순, pay 별 내림차순으로 정렬해서 출력하는 SQL를 작성하세요.
+SELECT deptno,ename,hiredate,sal,comm   
+         ,sal+nvl(comm,'0') as pay
+FROM emp
+where comm is null
+order by deptno , pay desc;
+[실행결과]
+    DEPTNO ENAME      HIREDATE        SAL       COMM        PAY
+---------- ---------- -------- ---------- ---------- ----------
+        10 KING       81/11/17       5000                  5000
+        10 CLARK      81/06/09       2450                  2450
+        10 MILLER     82/01/23       1300                  1300
+        20 SCOTT      87/04/19       3000                  3000
+        20 FORD       81/12/03       3000                  3000
+        20 JONES      81/04/02       2975                  2975
+        20 ADAMS      87/05/23       1100                  1100
+        20 SMITH      80/12/17        800                   800
+        30 BLAKE      81/05/01       2850                  2850
+        30 JAMES      81/12/03        950                   950
+
+10개 행이 선택되었습니다. 
+
+6. 오라클의 비교 연산자를 적으세요. 
+= != ^= <> <= >=  
+-- > < 
+7. 오라클의 논리 연산자를 적으세요. 
+and or 
+-- not
+8. 오라클의 SQL 연산자를 적으세요.
+(not)in (not)like
+--between
+--exists
+-- is (not)null
+9. insa 테이블에서 출신지역( city )가 수도권이 아닌 사원의 정보를 출력하는  SQL를 작성하세요.
+   ( 1차 부서별 , 2차 지역별 오름차순 정렬 )
+SELECT buseo,name,ssn,city
+FROM insa
+where city not in('서울','경기','인천')
+order by buseo,city
+[실행결과]
+BUSEO           NAME                 SSN            CITY      
+--------------- -------------------- -------------- ----------
+자재부          심심해               810206-2222222 전북      
+자재부          김싱식               800715-1313131 전북      
+자재부          문길수               721217-1951357 충남      
+총무부          허경운               760105-1458752 경남      
+총무부          정정해               790210-2101010 부산      
+홍보부          정한국               760909-1333333 강원      
+홍보부          정상호               810705-1212141 강원      
+
+18개 행이 선택되었습니다. 
+
+10. emp 테이블에서 10번 또는 20번 부서원 정보를 출력하는  SQL를 작성하세요. 
+SELECT deptno ,ename, hiredate 
+FROM emp
+where deptno in ('10','20')
+order by 1
+[실행결과]
+    DEPTNO ENAME      HIREDATE
+---------- ---------- --------
+        10 KING       81/11/17
+        10 MILLER     82/01/23
+        10 CLARK      81/06/09
+        20 SCOTT      87/04/19
+        20 FORD       81/12/03
+        20 ADAMS      87/05/23
+        20 JONES      81/04/02
+        20 SMITH      80/12/17
+
+8개 행이 선택되었습니다.
+
+11.  insa 테이블에서 급여가   2,000,000 <=    급여 <= 2,500,000  인 사원의 
+     부서명, 이름 , 급여(월급)를 부서별 오름차순, 급여별 내림차순으로 정렬해서 출력하는  SQL를 작성하세요.  
+SELECT buseo,name
+        ,(basicpay+sudang) as pay
+FROM insa
+where (basicpay+sudang) BETWEEN 2000000 and 2500000
+order by buseo,pay desc
+[실행결과]
+BUSEO           NAME                        PAY
+--------------- -------------------- ----------
+영업부          김정훈                  2124200
+인사부          박문수                  2465000
+인사부          박세열                  2230000
+자재부          문길수                  2450000
+총무부          정정해                  2428000
+홍보부          이미인                  2053000
+
+17개 행이 선택되었습니다. 
+-- 인라인 뷰 (INLINE VIEW)
+-- 인라인 뷰는 FROM 절에서 서브쿼리를 사용하여 생성한 임시 뷰이다.
+-- 뷰 : 가상 테이블
+SELECT *
+FROM ( SELECT buseo,name,(basicpay+sudang) as pay
+       FROM insa) e
+WHERE e.pay BETWEEN 200000 AND 2500000
+AND buseo != '총무부'
+12. emp 테이블에서 입사일자(hiredate)가   81년도인 사원 정보를 입사순으로 정렬해서 출력하는  SQL를 작성하세요.  
+SELECT empno ,ename, hiredate
+FROM emp
+where to_char(hiredate,'yy') = '81'
+// where substr(hiredate,1,2) = 81;
+/// where hiredate > '81/01/01'
+/// and hiredate < '81/12/31'
+//// where hiredate BETWEEN '81/01/01' AND '81/12/31'
+///// where EXTRACT(YEAR FROM hiredate) = '1981' -- 별 쓸모는 없어보임 
+order by 3
+[실행결과]
+     EMPNO ENAME      HIREDATE
+---------- ---------- --------
+      7499 ALLEN      81/02/20
+      7521 WARD       81/02/22
+      7566 JONES      81/04/02
+      7698 BLAKE      81/05/01
+      7782 CLARK      81/06/09
+      7844 TURNER     81/09/08
+      7654 MARTIN     81/09/28
+      7839 KING       81/11/17
+      7902 FORD       81/12/03
+      7900 JAMES      81/12/03
+
+10개 행이 선택되었습니다. 
+
+13. Alias 를 작성하는 3가지 방법을 적으세요. -- 예약어 사용시 ㄱ 사용 // 안쓰는게 가장 좋음 
+   SELECT deptno, ename 
+     , sal + comm   (ㄱ) as pay -- as "pay"
+     , sal + comm   (ㄴ)  pay
+     , sal + comm   (ㄷ)  'pay' -- as pay
+    FROM emp;
+
+14. emp 테이블에서 직속상사(mgr)가 없는  사원의 정보를 조회하는 쿼리 작성.
+SELECT mgr
+FROM emp
+where mgr is null
+14-2. emp 테이블에서 직속상사(mgr)가 있는  사원의 정보를 조회하는 쿼리 작성.
+SELECT mgr
+FROM emp
+where mgr is not null
+14-3. emp 테이블에서 직속상사(mgr)가 없는  사원의 mgr을 'CEO'로 출력하는 쿼리 작성.
+SELECT mgr , nvl(to_char(mgr),'CEO')
+FROM emp
+where mgr is null
+
+
+
+
+
+
